@@ -31,8 +31,6 @@ export default {
     methods:{
       get_api(){
 
-        // let nome_pesquisa = this.Personagem_nome
-
         let url_padrao="https://rickandmortyapi.com/api/character/?name=";
 
         console.log(url_padrao)
