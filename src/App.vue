@@ -1,6 +1,6 @@
 <template>
   <div>
-   
+    <img id="imagem-thumb" src="./assets/thumb.png" alt="">
     <Card/>
 
     </div>
@@ -31,3 +31,9 @@ export default {
 
 
 </script>
+<style>
+#imagem-thumb{
+  width: 100%;
+  border-radius: 50px 50px 0 0;
+}
+</style>
