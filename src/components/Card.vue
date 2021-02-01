@@ -3,15 +3,24 @@
       <div id="logo">
         <img  src="../assets/logo.png" alt="">
       </div>
+      <div>
+      
+        <v-select
+          :items="teste"
+          label="Solo field"
+          solo></v-select>
+  
+      </div>
       <input >
       <v-text-field v-model="Personagem_nome" label="Digite o Nome do Personagem"  hide-details="auto"></v-text-field>
       <v-btn id="button-search" type="button" value=" Search" v-on:click="get_api" block>
       Buscar
       </v-btn>
       
+      
       <div class="v-item-group ">
 
-        <div id="card-place" class="v-card" v-for="(id, status) in Personagem" :key="status">
+        <div id="card-place" class="v-card" v-for="(id) in Personagem" :key="id">
             <v-expansion-panels>
             <v-expansion-panel >
                       <v-expansion-panel-header>
@@ -38,16 +47,16 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios'
+// import vuetify from 'node_modules\vuetify\dist\vuetify.css'
+
 export default {
-    data(){
-      return{
-        Personagem:[],
-        Personagem_nome:""
-      };
-    },
+ data: () => ({
+      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      Personagem:[],
+      Personagem_nome:"",
+    }),
     
     methods:{
       get_api(){
@@ -60,6 +69,30 @@ export default {
           
         })
         
+      },
+
+      get_characters_by_name_status(){
+
+        let url_padrao="https://rickandmortyapi.com/api/character";
+        let request_url;
+        if(this.Personagem_status === 'Todos' && this.Personagem_nome){
+          request_url=`${url_padrao}/?name=${this.Personagem_nome}`;
+        }
+        else if(!this.Personagem_nome && this.Personagem_status !== 'Todos'){
+          request_url=`${url_padrao}/?status=${this.Personagem_status}`;
+        }
+        else if(this.Personagem_nome && this.Personagem_status !== 'Todos'){
+          request_url=`${url_padrao}/?name=${this.Personagem_name}&status=${this.Personagem_status}`;
+        }
+        else{
+          request_url=url_padrao;
+        }
+        
+        axios.get(request_url).then(res=>{
+          
+          this.Personagem=res.data.results;
+          
+        })
       }
     }
 }
