@@ -1,9 +1,10 @@
 body  {  	
 	margin: 0;  	
     padding: 0; 
-    background-color: rgba(0, 0, 0, 0.712);  
+    background-color: #6461E8;  
     }
     
 .container{
-    margin: auto 4vw;
+    margin: 10% auto;
+    max-width: 800px;
 }
